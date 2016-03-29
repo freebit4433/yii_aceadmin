@@ -1,0 +1,1 @@
+<h1>site/managerPage</h1>
