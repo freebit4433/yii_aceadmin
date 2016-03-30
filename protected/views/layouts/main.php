@@ -73,39 +73,50 @@
                     array(
                         'text' => "首页",
                         'href' => "{$this->createUrl('site/indexPage')}",
-                        'icon' => "menu-icon fa fa-tachometer"
+                        'icon' => "menu-icon fa fa-tachometer",
+                        'active' => false,
+                        'open' => false,
                     ),
                     array(
                         'text' => "管理员管理",
                         'href' => "{$this->createUrl('site/managerPage')}",
-                        'icon' => "menu-icon fa fa-users"
+                        'icon' => "menu-icon fa fa-users",
+                        'active' => false,
+                        'open' => false,
                     ),
                     array(
                         'text' => "menu item 3",
                         'icon' => "menu-icon fa fa-gift",
+                        'active' => false,
+                        'open' => false,
                         'submenu' => array(
                             array(
                                 'text' => "3_1",
                                 'href' => "{$this->createUrl('site/submenu1Page')}",
                                 'icon' => "menu-icon fa fa-caret-right",
+                                'active' => false,
                             ),
                             array(
                                 'text' => "3_2",
                                 'href' => "{$this->createUrl('site/submenu2Page')}",
                                 'icon' => "menu-icon fa fa-caret-right",
+                                'active' => false,
                             ),
                         ),
                     ),
                     array(
                         'text' => "menu item 4",
                         'href' => "",
-                        'icon' => "menu-icon fa fa-glass"
+                        'icon' => "menu-icon fa fa-glass",
+                        'active' => false,
+                        'open' => false,
                     ),
                 );
-                echo "<ul class="nav nav-list">";
+                /*echo '<ul class="nav nav-list">';
+                foreach($menuList as $menuItem){
 
-
-                echo "</ul>";
+                }
+                echo '</ul>';*/
             ?>
             <ul class="nav nav-list">
                 <!-- 1 level item -->
@@ -118,7 +129,7 @@
                     </a>
                 </li>
                 <!-- 2 level item -->
-                <li>
+                <li class="active">
                     <a href="<?php echo $this->createUrl('site/managerPage'); ?>">
                         <i class="menu-icon fa fa-users"></i>
                         <span class="menu-text">
@@ -127,7 +138,7 @@
                     </a>
                 </li>
                 <!-- 3 level item -->
-                <li>
+                <li class="">
                     <a href="" class="dropdown-toggle">
                         <i class="menu-icon fa fa-gift"></i>
                         <span class="menu-text">
