@@ -70,41 +70,48 @@
             </div> -->
             <?php
                 $menuList = array(
-                    array(
+                    '首页' => array(
                         'text' => "首页",
-                        'href' => "{$this->createUrl('site/indexPage')}",
+                        'href' => "{$this->createUrl('site/index')}",
                         'icon' => "menu-icon fa fa-tachometer",
                         'active' => false,
                         'open' => false,
                     ),
-                    array(
+                    '管理员管理' => array(
                         'text' => "管理员管理",
-                        'href' => "{$this->createUrl('site/managerPage')}",
+                        'href' => "{$this->createUrl('site/manager')}",
                         'icon' => "menu-icon fa fa-users",
                         'active' => false,
                         'open' => false,
                     ),
-                    array(
+                    'menu item 3' => array(
                         'text' => "menu item 3",
+                        'href' => '',
                         'icon' => "menu-icon fa fa-gift",
                         'active' => false,
                         'open' => false,
                         'submenu' => array(
-                            array(
+                            '3_1' => array(
                                 'text' => "3_1",
-                                'href' => "{$this->createUrl('site/submenu1Page')}",
+                                'href' => "{$this->createUrl('site/submenu1')}",
                                 'icon' => "menu-icon fa fa-caret-right",
                                 'active' => false,
                             ),
-                            array(
+                            '3_2' => array(
                                 'text' => "3_2",
-                                'href' => "{$this->createUrl('site/submenu2Page')}",
+                                'href' => "{$this->createUrl('site/submenu2')}",
+                                'icon' => "menu-icon fa fa-caret-right",
+                                'active' => false,
+                            ),
+                            '3_3' => array(
+                                'text' => "3_3",
+                                'href' => "{$this->createUrl('site/submenu3Page')}",
                                 'icon' => "menu-icon fa fa-caret-right",
                                 'active' => false,
                             ),
                         ),
                     ),
-                    array(
+                    'menu item 4' => array(
                         'text' => "menu item 4",
                         'href' => "",
                         'icon' => "menu-icon fa fa-glass",
@@ -112,32 +119,70 @@
                         'open' => false,
                     ),
                 );
-                /*echo '<ul class="nav nav-list">';
-                foreach($menuList as $menuItem){
-
+                //$this->item;
+                //$this->subItem;
+                $mark_me = &$menuList[$this->item];
+                $mark_me['active'] = true;
+                if(isset($mark_me['submenu'])){
+                    if(isset($this->subItem)){
+                        $mark_me['open'] = true;
+                        $mark_me['submenu'][$this->subItem]['active'] = true;
+                    }
                 }
-                echo '</ul>';*/
             ?>
-            <ul class="nav nav-list">
-                <!-- 1 level item -->
+            <?php echo '<ul class="nav nav-list">';  ?>
+                <?php foreach($menuList as $menuItem){ ?>
+                    <?php
+                    $liClass1 = $menuItem['active'] ? 'active' : '';
+                    $liClass2 = $menuItem['open'] ? 'open' : '';
+                    echo "<li class=\"{$liClass1} {$liClass2}\">";
+                    ?>
+                        <?php
+                            $idontknow = '';
+                            if(isset($menuItem['submenu'])){$idontknow = 'dropdown-toggle';}
+                            echo "<a href=\"{$menuItem['href']}\" class=\"{$idontknow}\">";
+                        ?>
+                            <?php echo "<i class=\"{$menuItem['icon']}\"></i>"; ?>
+                            <?php echo "<span class=\"menu-text\">{$menuItem['text']}</span>";  ?>
+                            <?php if(isset($menuItem['submenu'])){echo "<b class=\"arrow fa fa-angle-down\"></b>";} ?>
+                        <?php echo "</a>";  ?>
+                        <?php if(isset($menuItem['submenu'])){ ?>
+                            <?php echo "<ul class=\"submenu\">"; ?>
+                                <?php foreach($menuItem['submenu'] as $menuSubItem){  ?>
+                                    <?php
+                                    $subliClass = $menuSubItem['active'] ? 'active' : '';
+                                    echo "<li class=\"{$subliClass}\">";
+                                    ?>
+                                        <?php echo "<a href=\"{$menuSubItem['href']}\" >"; ?>
+                                            <?php echo "<i class=\"{$menuSubItem['icon']}\"></i>{$menuSubItem['text']}"; ?>
+                                            <?php echo "<b class=\"arrow\"></b>"; ?>
+                                        <?php echo "</a>"; ?>
+                                    <?php echo "</li>"; ?>
+                                <?php } ?>
+                            <?php echo "</ul>"; ?>
+                        <?php } ?>
+                    <?php echo '</li>';  ?>
+                <?php } ?>
+            <?php echo '</ul>'; ?>
+
+
+            <!--<ul class="nav nav-list">
                 <li class="">
-                    <a href="<?php echo $this->createUrl('site/indexPage'); ?>">
+                    <a href="<?php /*echo $this->createUrl('site/index'); */?>">
                         <i class="menu-icon fa fa-tachometer"></i>
                         <span class="menu-text">
                             首页
                         </span>
                     </a>
                 </li>
-                <!-- 2 level item -->
                 <li class="active">
-                    <a href="<?php echo $this->createUrl('site/managerPage'); ?>">
+                    <a href="<?php /*echo $this->createUrl('site/managerPage'); */?>">
                         <i class="menu-icon fa fa-users"></i>
                         <span class="menu-text">
                             管理员管理
                         </span>
                     </a>
                 </li>
-                <!-- 3 level item -->
                 <li class="">
                     <a href="" class="dropdown-toggle">
                         <i class="menu-icon fa fa-gift"></i>
@@ -146,17 +191,16 @@
                         </span>
                         <b class="arrow fa fa-angle-down"></b>
                     </a>
-                    <b class="arrow"></b>
                     <ul class="submenu">
                         <li class="">
-                            <a href="<?php echo $this->createUrl('site/submenu1Page'); ?>">
+                            <a href="<?php /*echo $this->createUrl('site/submenu1Page'); */?>">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 3_1
                             </a>
                             <b class="arrow"></b>
                         </li>
                         <li class="">
-                            <a href="<?php echo $this->createUrl('site/submenu2Page'); ?>">
+                            <a href="<?php /*echo $this->createUrl('site/submenu2Page'); */?>">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 3_2
                             </a>
@@ -165,7 +209,6 @@
                         </li>
                     </ul>
                 </li>
-                <!-- 4 level item -->
                 <li>
                     <a href="">
                         <i class="menu-icon fa fa-glass"></i>
@@ -175,7 +218,7 @@
                     </a>
                 </li>
                 
-            </ul>
+            </ul>-->
             <!-- <div class="sidebar-toggle">
                 
             </div> -->

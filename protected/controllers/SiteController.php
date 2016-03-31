@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+	public $item = "首页";
+	public $subItem = null;
 	/**
 	 * Declares class-based actions.
 	 */
@@ -25,25 +27,27 @@ class SiteController extends Controller
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
 	 */
-	public function actionIndex()
-	{
+	public function actionIndex(){
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+
 		$this->render('index');
 	}
 
-	public function actionIndexPage(){
-		$this->render('index');
-	}
-
-	public function actionManagerPage(){
+	public function actionManager(){
+		$this->item = "管理员管理";
+		$this->subItem = null;
 		$this->render('manager');
 	}
 
-	public function actionSubmenu1Page(){
+	public function actionSubmenu1(){
+		$this->item = "menu item 3";
+		$this->subItem = '3_1';
 		$this->render('submenu1');
 	}
-	public function actionSubmenu2Page(){
+	public function actionSubmenu2(){
+		$this->item = "menu item 3";
+		$this->subItem = '3_2';
 		$this->render('submenu2');
 	}
 
