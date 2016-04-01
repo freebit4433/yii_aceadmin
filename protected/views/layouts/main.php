@@ -69,7 +69,7 @@
                 </div>
             </div> -->
             <?php
-                $menuList = array(
+                /*$menuList = array(
                     '首页' => array(
                         'text' => "首页",
                         'href' => "{$this->createUrl('site/index')}",
@@ -118,9 +118,25 @@
                         'active' => false,
                         'open' => false,
                     ),
-                );
+                );*/
                 //$this->item;
                 //$this->subItem;
+                $menuList = $this->menuList;
+                foreach($menuList as $key1 => $menuItem){
+                    if(!empty($menuItem['href'])){
+                        $menuList[$key1]['href'] = $this->createUrl($menuItem['href']);
+                    }
+                    if(isset($menuItem['submenu'])){
+                        foreach($menuItem['submenu'] as $key2 => $menuSubItem){
+                            if(!empty($menuSubItem['href'])){
+                                $menuList[$key1]['submenu'][$key2]['href'] = $this->createUrl($menuSubItem['href']);
+                            }
+                        }
+                    }
+                }
+                $menuItem = null;
+                $menuSubItem = null;
+
                 $mark_me = &$menuList[$this->item];
                 $mark_me['active'] = true;
                 if(isset($mark_me['submenu'])){
