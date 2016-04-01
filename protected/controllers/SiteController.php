@@ -51,6 +51,16 @@ class SiteController extends Controller
 		$this->subItem = '3_2';
 		$this->render('submenu2');
 	}
+	public function actionSubmenu3(){
+		$this->item = "menu item 3";
+		$this->subItem = '3_3';
+		$this->render('submenu3');
+	}
+	public function actionItem4(){
+		$this->item = "menu item 4";
+		$this->subItem = null;
+		$this->render('item4');
+	}
 
 	/**
 	 * This is the action to handle external exceptions.
