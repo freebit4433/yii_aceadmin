@@ -50,9 +50,7 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="">
-
-                                    </form>
+                                    <?php echo $content;  ?>
 
 
                                 </div>
@@ -70,7 +68,6 @@
         </div><!-- /.row -->
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
-<!--只使用layout文件，不用site/login模板-->
-<?php echo $content; ?>
+
 </body>
 </html>
