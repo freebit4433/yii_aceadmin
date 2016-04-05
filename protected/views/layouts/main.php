@@ -29,7 +29,7 @@
                             <img class="nav-user-photo" src="<?php echo Yii::app()->baseUrl; ?>/themes/ace_admin_1.3.4/assets/avatars/user.jpg" alt="Jason's Photo" />
                             <span class="user-info">
                                 <small>Welcome,</small>
-                                Jason
+                                <?php echo Yii::app()->user->name; ?>
                             </span>
 
                             <i class="ace-icon fa fa-caret-down"></i>
@@ -46,7 +46,7 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
+                                <a href="<?php echo $this->createUrl('site/logout'); ?>">
                                     <i class="ace-icon fa fa-power-off"></i>
                                     Logout
                                 </a>

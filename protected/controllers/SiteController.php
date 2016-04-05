@@ -32,6 +32,7 @@ class SiteController extends Controller
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->item = "首页";
 		$this->subItem = null;
+
 		$this->render('index');
 	}
 

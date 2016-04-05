@@ -24,5 +24,12 @@ class Controller extends CController{
 	public $menuList;
 	public function init(){
 		$this->menuList = Yii::app()->params['menuList'];
+
+		//验证用户是否登录，如果没有登录则重定向至登录页面
+		if (Yii::app()->user->isGuest && Yii::app()->request->queryString != 'r=site/login') {
+			$this->redirect(array('site/login'));
+		}
+		//后续可以给这下面加权限管理
+
 	}
 }
