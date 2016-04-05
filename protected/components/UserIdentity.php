@@ -31,7 +31,7 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_NONE;
 		return !$this->errorCode;*/
 
-		$record = employee::model()->findByAttributes(array('name' => $this->username));
+		$record = employee::model()->findByAttributes(array('name' => $this->username,'is_del' => '0'));
 		if ($record === null) {
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		} else if ($record->password != md5($this->password)) {

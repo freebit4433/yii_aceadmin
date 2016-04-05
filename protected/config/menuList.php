@@ -15,7 +15,7 @@ return array(
     ),
     '管理员管理' => array(
         'text' => "管理员管理",
-        'href' => "site/manager",
+        'href' => "employee/index",
         'icon' => "menu-icon fa fa-users",
         'active' => false,
         'open' => false,
