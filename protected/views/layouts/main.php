@@ -10,6 +10,9 @@
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/ace_admin_1.3.4/assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/ace_admin_1.3.4/assets/js/ace.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/ace_admin_1.3.4/assets/js/ace-elements.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 </head>
 <body class="no-skin">
     <div class="navbar" id="navbar">
@@ -69,179 +72,87 @@
                 </div>
             </div> -->
             <?php
-                /*$menuList = array(
-                    '首页' => array(
-                        'text' => "首页",
-                        'href' => "{$this->createUrl('site/index')}",
-                        'icon' => "menu-icon fa fa-tachometer",
-                        'active' => false,
-                        'open' => false,
-                    ),
-                    '管理员管理' => array(
-                        'text' => "管理员管理",
-                        'href' => "{$this->createUrl('site/manager')}",
-                        'icon' => "menu-icon fa fa-users",
-                        'active' => false,
-                        'open' => false,
-                    ),
-                    'menu item 3' => array(
-                        'text' => "menu item 3",
-                        'href' => '',
-                        'icon' => "menu-icon fa fa-gift",
-                        'active' => false,
-                        'open' => false,
-                        'submenu' => array(
-                            '3_1' => array(
-                                'text' => "3_1",
-                                'href' => "{$this->createUrl('site/submenu1')}",
-                                'icon' => "menu-icon fa fa-caret-right",
-                                'active' => false,
-                            ),
-                            '3_2' => array(
-                                'text' => "3_2",
-                                'href' => "{$this->createUrl('site/submenu2')}",
-                                'icon' => "menu-icon fa fa-caret-right",
-                                'active' => false,
-                            ),
-                            '3_3' => array(
-                                'text' => "3_3",
-                                'href' => "{$this->createUrl('site/submenu3Page')}",
-                                'icon' => "menu-icon fa fa-caret-right",
-                                'active' => false,
-                            ),
-                        ),
-                    ),
-                    'menu item 4' => array(
-                        'text' => "menu item 4",
-                        'href' => "",
-                        'icon' => "menu-icon fa fa-glass",
-                        'active' => false,
-                        'open' => false,
-                    ),
-                );*/
-                //$this->item;
-                //$this->subItem;
-                $menuList = $this->menuList;
-                foreach($menuList as $key1 => $menuItem){
-                    if(!empty($menuItem['href'])){
-                        $menuList[$key1]['href'] = $this->createUrl($menuItem['href']);
+            $menuList = $this->menuList;
+            if(strpos($_SERVER['REQUEST_URI'],'?r=')){
+                $url = explode('?r=',$_SERVER['REQUEST_URI'])[1];
+                if(strpos($url,'&')) {
+                    $url = explode('&', $url)[0];
+                }
+            }else{
+                $url = 'site/index';
+            }
+            ?>
+            <ul class="nav nav-list">
+                <?php foreach($menuList as $name => $item) { ?>
+                    <li class="<?php
+                    if(in_array($url,$item)){
+                        echo "active ";
                     }
-                    if(isset($menuItem['submenu'])){
-                        foreach($menuItem['submenu'] as $key2 => $menuSubItem){
-                            if(!empty($menuSubItem['href'])){
-                                $menuList[$key1]['submenu'][$key2]['href'] = $this->createUrl($menuSubItem['href']);
+                    if(isset($item[2])){
+                        foreach($item[2] as $subItem){
+                            if(in_array($url,$subItem)){
+                                echo "open";
                             }
                         }
                     }
-                }
-                $menuItem = null;
-                $menuSubItem = null;
-
-                $mark_me = &$menuList[$this->item];
-                $mark_me['active'] = true;
-                if(isset($mark_me['submenu'])){
-                    if(isset($this->subItem)){
-                        $mark_me['open'] = true;
-                        $mark_me['submenu'][$this->subItem]['active'] = true;
-                    }
-                }
-            ?>
-            <?php echo '<ul class="nav nav-list">';  ?>
-                <?php foreach($menuList as $menuItem){ ?>
-                    <?php
-                    $liClass1 = $menuItem['active'] ? 'active' : '';
-                    $liClass2 = $menuItem['open'] ? 'open' : '';
-                    echo "<li class=\"{$liClass1} {$liClass2}\">";
-                    ?>
-                        <?php
-                            $idontknow = '';
-                            if(isset($menuItem['submenu'])){$idontknow = 'dropdown-toggle';}
-                            echo "<a href=\"{$menuItem['href']}\" class=\"{$idontknow}\">";
-                        ?>
-                            <?php echo "<i class=\"{$menuItem['icon']}\"></i>"; ?>
-                            <?php echo "<span class=\"menu-text\">{$menuItem['text']}</span>";  ?>
-                            <?php if(isset($menuItem['submenu'])){echo "<b class=\"arrow fa fa-angle-down\"></b>";} ?>
-                        <?php echo "</a>";  ?>
-                        <?php if(isset($menuItem['submenu'])){ ?>
-                            <?php echo "<ul class=\"submenu\">"; ?>
-                                <?php foreach($menuItem['submenu'] as $menuSubItem){  ?>
-                                    <?php
-                                    $subliClass = $menuSubItem['active'] ? 'active' : '';
-                                    echo "<li class=\"{$subliClass}\">";
-                                    ?>
-                                        <?php echo "<a href=\"{$menuSubItem['href']}\" >"; ?>
-                                            <?php echo "<i class=\"{$menuSubItem['icon']}\"></i>{$menuSubItem['text']}"; ?>
-                                            <?php echo "<b class=\"arrow\"></b>"; ?>
-                                        <?php echo "</a>"; ?>
-                                    <?php echo "</li>"; ?>
+                    ?> ">
+                        <a href="<?php echo Yii::app()->createUrl($item[0]);?>" class="<?php if(isset($item[2])) echo "dropdown-toggle"; ?>">
+                            <i class="<?php echo $item[1]; ?>"></i>
+                            <span class="menu-text"><?php echo $name; ?></span>
+                            <?php
+                            if(isset($item[2])){
+                                echo "<b class=\"arrow fa fa-angle-down\"></b>";
+                            }
+                            ?>
+                        </a>
+                        <?php if(isset($item[2])) { ?>
+                            <ul class="submenu">
+                                <?php foreach($item[2] as $subName => $subItem){ ?>
+                                    <li class="<?php if($url == $subItem[0]) echo 'active'; ?> ">
+                                        <a href="<?php echo Yii::app()->createUrl($subItem[0]); ?>">
+                                            <i class="<?php echo $subItem[1]; ?>"></i>
+                                            <?php echo $subName; ?>
+                                            <b class="arrow"></b>
+                                        </a>
+                                    </li>
                                 <?php } ?>
-                            <?php echo "</ul>"; ?>
+                            </ul>
                         <?php } ?>
-                    <?php echo '</li>';  ?>
+                    </li>
                 <?php } ?>
-            <?php echo '</ul>'; ?>
-
-
-            <!--<ul class="nav nav-list">
                 <li class="">
-                    <a href="<?php /*echo $this->createUrl('site/index'); */?>">
-                        <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text">
-                            首页
-                        </span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="<?php /*echo $this->createUrl('site/managerPage'); */?>">
-                        <i class="menu-icon fa fa-users"></i>
-                        <span class="menu-text">
-                            管理员管理
-                        </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="" class="dropdown-toggle">
-                        <i class="menu-icon fa fa-gift"></i>
-                        <span class="menu-text">
-                            menu item 3
-                        </span>
+                    <a href="dfsdf" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-pencil-square-o"></i>
+                        <span class="menu-text"> Forms </span>
+
                         <b class="arrow fa fa-angle-down"></b>
                     </a>
+
+
                     <ul class="submenu">
                         <li class="">
-                            <a href="<?php /*echo $this->createUrl('site/submenu1Page'); */?>">
+                            <a href="form-elements.html">
                                 <i class="menu-icon fa fa-caret-right"></i>
-                                3_1
+                                Form Elements
                             </a>
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="">
-                            <a href="<?php /*echo $this->createUrl('site/submenu2Page'); */?>">
-                                <i class="menu-icon fa fa-caret-right"></i>
-                                3_2
-                            </a>
-                    
                             <b class="arrow"></b>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="">
-                        <i class="menu-icon fa fa-glass"></i>
-                        <span class="menu-text">
-                            menu item 4
-                        </span>
-                    </a>
-                </li>
-                
-            </ul>-->
-            <!-- <div class="sidebar-toggle">
-                
-            </div> -->
+            </ul>
         </div>
 
-        <div class="main-contain">
-            <?php echo $content; ?>
+        <div class="main-content">
+            <div class="breadcrumbs">
+                <?php
+                    $this->widget('zii.widgets.CBreadcrumbs', array(
+                        'links'=>$this->breadcrumbs,
+                    ));
+                ?>
+            </div>
+            <div class="page-content">
+                <?php echo $content; ?>
+            </div>
         </div>
     </div>
     

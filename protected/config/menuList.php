@@ -7,52 +7,30 @@
  */
 return array(
     '首页' => array(
-        'text' => "首页",
-        'href' => "site/index",
-        'icon' => "menu-icon fa fa-tachometer",
-        'active' => false,
-        'open' => false,
+        "site/index",
+        "menu-icon fa fa-tachometer",
     ),
     '管理员管理' => array(
-        'text' => "管理员管理",
-        'href' => "employee/index",
-        'icon' => "menu-icon fa fa-users",
-        'active' => false,
-        'open' => false,
+        "employee/index",
+        "menu-icon fa fa-users",
     ),
     'menu item 3' => array(
-        'text' => "menu item 3",
-        'href' => '',
-        'icon' => "menu-icon fa fa-gift",
-        'active' => false,
-        'open' => false,
-        'submenu' => array(
+        "",
+        "menu-icon fa fa-gift",
+        array(
             '3_1' => array(
-                'text' => "3_1",
-                'href' => "site/submenu1",
-                'icon' => "menu-icon fa fa-caret-right",
-                'active' => false,
+                "site/submenu1",
+                "menu-icon fa fa-caret-right",
             ),
             '3_2' => array(
-                'text' => "3_2",
-                'href' => "site/submenu2",
-                'icon' => "menu-icon fa fa-caret-right",
-                'active' => false,
-            ),
-            '3_3' => array(
-                'text' => "3_3",
-                'href' => "site/submenu3",
-                'icon' => "menu-icon fa fa-caret-right",
-                'active' => false,
+                "site/submenu2",
+                "menu-icon fa fa-caret-right",
             ),
         ),
     ),
     'menu item 4' => array(
-        'text' => "menu item 4",
-        'href' => "site/item4",
-        'icon' => "menu-icon fa fa-glass",
-        'active' => false,
-        'open' => false,
+        "site/item4",
+        "menu-icon fa fa-glass",
     ),
 );
 ?>
