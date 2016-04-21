@@ -26,6 +26,10 @@ return array(
                 "site/submenu2",
                 "menu-icon fa fa-caret-right",
             ),
+            '3_3' => array(
+                "site/submenu3",
+                "menu-icon fa fa-caret-right",
+            ),
         ),
     ),
     'menu item 4' => array(

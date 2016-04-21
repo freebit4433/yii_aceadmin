@@ -2,13 +2,23 @@
 
 class EmployeeController extends Controller{
 
-    public $item = "首页";
+    public $item = "管理员管理";
     public $subItem = null;
 
     public function actionIndex(){
-        $this->item = "管理员管理";
-        $this->subItem = null;
-        $this->render('index');
+        $employeeModel = new Employee();
+        $employeeModel->unsetAttributes();
+
+        $employeeModel->is_del = 0;
+
+
+        $this->render('index',array(
+            'model' => $employeeModel,
+        ));
+    }
+
+    public function actionTest(){
+        $this->render('test');
     }
 
 

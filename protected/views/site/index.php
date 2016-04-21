@@ -10,11 +10,10 @@ $this->pageTitle=Yii::app()->name;
 if(Yii::app()->user->isGuest){
     echo "请登录后再操作";
 }else{
-    $userId = Yii::app()->user->id;
-    echo "当前登录用户为:{$userId}";
+    $userId = Yii::app()->user->name;
+    echo "当前登录用户为: {$userId}";
 }
-echo "<br/>";
-echo Yii::app()->request->queryString;
+
 
 
 

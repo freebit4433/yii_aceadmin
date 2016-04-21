@@ -12,6 +12,8 @@
  */
 class Employee extends CActiveRecord
 {
+
+	public static $type  = array(0 => '系统后台管理员', 1 => '出版社管理用户');
 	/**
 	 * @return string the associated database table name
 	 */
@@ -86,6 +88,7 @@ class Employee extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('type',$this->type);
 		$criteria->compare('ctime',$this->ctime,true);
+		$criteria->compare('is_del', $this->is_del);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
