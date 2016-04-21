@@ -17,6 +17,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.modules.srbac.controllers.SBaseController',
 	),
 
 	'modules'=>array(
@@ -27,6 +28,38 @@ return array(
 			'password'=>'zhangtao',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+		),
+		'srbac' => array(
+			'userclass'=>'employee', //可选,默认是 User
+			'userid'=>'id', //可选,默认是 userid
+			'username'=>'name', //可选，默认是 username
+			'debug'=>true, //可选,默认是 false
+			'pageSize'=>10, //可选，默认是 15
+			'superUser' =>'admin', //可选，默认是 Authorizer
+			'css'=>'srbac.css', //可选，默认是 srbac.css
+			'layout'=>
+				'application.views.layouts.main', //可选,默认是
+			// application.views.layouts.main, 必须是一个存在的路径别名
+			'notAuthorizedView'=>
+				'srbac.views.authitem.unauthorized', // 可选,默认是unauthorized.php
+			//srbac.views.authitem.unauthorized, 必须是一个存在的路径别名
+			'alwaysAllowed'=>array(    //可选,默认是 gui
+				'SiteLogin','SiteLogout','SiteIndex','SiteAdmin',
+				'SiteError', 'SiteContact'),
+			'userActions'=>array(//可选,默认是空数组
+				'Show','View','List'),
+			'listBoxNumberOfLines' => 15, //可选,默认是10
+			'imagesPath' => 'srbac.images', //可选,默认是 srbac.images
+			'imagesPack'=>'noia', //可选,默认是 noia
+			'iconText'=>true, //可选,默认是 false
+			'header'=>'srbac.views.authitem.header', //可选,默认是
+			// srbac.views.authitem.header, 必须是一个存在的路径别名
+			'footer'=>'srbac.views.authitem.footer', //可选,默认是
+			// srbac.views.authitem.footer, 必须是一个存在的路径别名
+			'showHeader'=>true, //可选,默认是false
+			'showFooter'=>true, //可选,默认是false
+			'alwaysAllowedPath'=>'srbac.components', //可选,默认是 srbac.components
+			// 必须是一个存在的路径别名
 		),
 
 	),
@@ -53,6 +86,14 @@ return array(
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
+
+		'authManager' => array(
+			'class'=>'CDbAuthManager',
+			'connectionID'=>'db',
+			'itemTable' => 'authitem',//认证项表名称
+			'itemChildTable' => 'authitemchild',//认证项父子关系
+			'assignmentTable' => 'authassignment',//认证项赋权关系
+		),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

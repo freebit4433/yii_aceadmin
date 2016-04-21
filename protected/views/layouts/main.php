@@ -72,7 +72,11 @@
                 </div>
             </div> -->
             <?php
-            $menuList = $this->menuList;
+            if(isset($this->menuList)){
+                $menuList = $this->menuList;
+            }else{
+                $menuList = array();
+            }
             if(strpos($_SERVER['REQUEST_URI'],'?r=')){
                 $url = explode('?r=',$_SERVER['REQUEST_URI'])[1];
                 if(strpos($url,'&')) {
